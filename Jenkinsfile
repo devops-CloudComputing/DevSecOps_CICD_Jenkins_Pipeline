@@ -12,14 +12,14 @@ pipeline {
         ''' 
       }
     }
-    stage ('Check-Git-Secrets') {
-      steps {
-        sh 'rm -rf trufflehog || true '
-        sh ' docker run -it -v "$PWD:/pwd" ghcr.io/trufflesecurity/trufflehog:latest github --repo https://github.com/devops-CloudComputing/DevSecOps_CICD_Jenkins_Pipeline.git --debug --json > trufflehog '
-        sh 'cat trufflehog'     
-      
-      }
+   stage ('Check-Git-Secrets') {
+    steps {
+        sh 'rm -rf trufflehog || true'
+        sh 'docker run -v "$PWD:/pwd" ghcr.io/trufflesecurity/trufflehog:latest github --repo https://github.com/devops-CloudComputing/DevSecOps_CICD_Jenkins_Pipeline.git --debug --json > trufflehog'
+        sh 'cat trufflehog'
     }
+}
+
 
     stage ('Build') {
       steps {
